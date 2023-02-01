@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"; 
+import { useState, useCallback } from "react"; 
 import { View, Text, ScrollView, Alert } from "react-native";
 import { api } from '../lib/axios'
 import { generateDatesFromYearBeginning } from '../utils/generate-dates-from-year-beginning'
 import { HabitDay, DAY_SIZE } from "../components/HabitDay";
 import { Header } from "../components/Header";
 import { Loading } from "../components/Loading";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import dayjs from "dayjs";
 
 const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S','S']
@@ -38,9 +38,9 @@ export function Home() {
         }
     }
 
-    useEffect(() => {
+    useFocusEffect(useCallback(() => {
         fecthData()
-    }, [])
+    }, []))
 
     if(loading){
         return(
